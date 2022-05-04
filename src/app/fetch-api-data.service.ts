@@ -95,32 +95,34 @@ export class FetchApiDataService {
   }
   
 
- // Add favourite movie 
- public addFavMovie(movie_id: any): Observable<any> {
-  
-    const token = localStorage.getItem('token');
+// Add favourite movie
+public addFavMovie(movie_id: any): Observable<any> {
+  const token = localStorage.getItem('token');
   const username = localStorage.getItem('user');
-  return this.http.post(apiUrl+`/users/${username}/movies/${movie_id}`,  {headers: new HttpHeaders(
-    {
-      Authorization: `Bearer + ${token}`,
-    })}).pipe(
-    map(this.extractResponseData),
-    catchError(this.handleError)
-  );
+  return this.http
+    .post(
+      apiUrl + `/users/${username}/movies/${movie_id}`,
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        }),
+      }
+    )
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
 }
-
 
 // Delete favourite movie
 public deleteFavMovie(movie_id: any): Observable<any> {
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('user');
-  return this.http.delete(apiUrl + `/users/${username}/movies/${movie_id}`, {headers: new HttpHeaders(
-    {
-      Authorization: 'Bearer' + token,
-    })}).pipe(
-    map(this.extractResponseData),
-    catchError(this.handleError)
-  );
+  return this.http
+    .delete(apiUrl + `/users/${username}/movies/${movie_id}`, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    })
+    .pipe(catchError(this.handleError));
 }
 
 // Edit User Profile

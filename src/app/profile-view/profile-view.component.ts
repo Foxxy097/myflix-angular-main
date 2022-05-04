@@ -86,7 +86,7 @@ export class ProfileViewComponent implements OnInit {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
       movies = res;
       movies.forEach((movie: any) => {
-        if (this.user.FavouriteMovies.includes(movie._id)) {
+        if (this.user.FavouriteMovies?.includes(movie._id)) {
           this.favMovies.push(movie);
           this.displayElement = true;
         }

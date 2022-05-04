@@ -4,47 +4,32 @@
     <mat-dialog-content class="">
       <mat-card-title>{{ movie.Title }}</mat-card-title>
       <div class="img-container">
-        <mat-card-subtitle
-          ><img src="{{ movie.ImagePath }}"
-        /></mat-card-subtitle>
+        <mat-card-subtitle><img src="{{ movie.ImagePath }}" /></mat-card-subtitle>
       </div>
       <mat-card-header>
-        <button
-          class="director-button"
-          mat-button
-          color="grey"
-          (click)="
+        <button class="director-button" mat-button color="grey" (click)="
             openDirectorDialog(
               movie.Director.Name,
               movie.Director.Bio,
               movie.Director.Birth
             )
-          "
-        >
+          ">
           Director Details
         </button>
 
-        <button
-          class="genre-button"
-          mat-button
-          color="grey"
-          (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)"
-        >
+        <button class="genre-button" mat-button color="grey"
+          (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)">
           Genre Details
         </button>
-        <button
-          class="synopsis-button"
-          mat-button
-          color="grey"
-          (click)="
+        <button class="synopsis-button" mat-button color="grey" (click)="
             openSynopsis(movie.Title, movie.ImagePath, movie.Description)
-          "
-        >
+          ">
           Synopsis
         </button>
 
-        <button mat-button (click)="addToUserFavs(movie._id)">
-          Add Movie To Favourite
+        <button color= "warn" mat-button>
+          <mat-icon *ngIf="!isFavorite(movie._id)" (click)="addToUserFavs(movie._id)"> favorite_border </mat-icon>
+          <mat-icon *ngIf="isFavorite(movie._id)" (click)="DeleteFavs(movie._id)"> favorite </mat-icon>
         </button>
       </mat-card-header>
     </mat-dialog-content>
